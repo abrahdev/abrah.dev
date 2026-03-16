@@ -5,6 +5,10 @@ import ReactLogo from "../components/icons/ReactLogo.astro";
 import PreviewIcon from "../components/icons/PreviewIcon.astro";
 import PythonLogo from "../components/icons/PythonLogo.astro";
 import NotionLogo from "../components/icons/NotionLogo.astro";
+import StrapiLogo from "../components/icons/StrapiLogo.astro";
+import DartLogo from "../components/icons/DartLogo.astro";
+import DockerLogo from "../components/icons/DockerLogo.astro";
+import FlutterLogo from "../components/icons/FlutterLogo.astro";
 import LinkButton from "./LinkButton.astro";
 
 const TAGS = {
@@ -34,8 +38,38 @@ const TAGS = {
     class: "bg-[#ffffff] text-[#000000]",
     icon: NotionLogo,
   },
+  STRAPI: {
+    name: "Strapi",
+    class: "bg-[#4945FF] text-white",
+    icon: StrapiLogo,
+  },
+  DART: {
+    name: "Dart",
+    class: "bg-[#0175C2] text-white",
+    icon: DartLogo,
+  },
+  DOCKER: {
+    name: "Docker",
+    class: "bg-[#2496ED] text-white",
+    icon: DockerLogo,
+  },
+  FLUTTER: {
+    name: "Flutter",
+    class: "bg-[#dddddd] text-blue-500",
+    icon: FlutterLogo,
+  },
 };
 const PROJECTS = [
+  {
+    title: "Actualmente - Karter",
+    description:
+      "Desarrollo de una herramienta especializada orientada a la eficiencia y automatización de procesos. Este proyecto se centra en la optimización de flujos de trabajo técnicos, facilitando la gestión y el procesamiento de datos a través de una arquitectura sólida y escalable.",
+    link: "https://abrahdev.github.io/karter/",
+    repo: "https://github.com/abrahdev/karter",
+    image:
+      "https://raw.githubusercontent.com/abrahdev/abrah.dev/refs/heads/main/src/assets/projects/karter.png",
+    tags: [TAGS.DART, TAGS.DOCKER, TAGS.FLUTTER],
+  },
   {
     title: "Web page José Carnicería",
     description:
@@ -44,7 +78,7 @@ const PROJECTS = [
     repo: "",
     image:
       "https://raw.githubusercontent.com/abrahdev/abrah.dev/refs/heads/main/src/assets/projects/jose-carniceria.png",
-    tags: [TAGS.ASTRO, TAGS.TAILWIND,], 
+    tags: [TAGS.ASTRO, TAGS.TAILWIND, TAGS.STRAPI],
   },
   {
     title: "Creador de Notion Marketplace",
@@ -62,7 +96,7 @@ const PROJECTS = [
     description:
       "Mi portafolio creado en Astro, utilizando TailwindCSS para los estilos y desplegado en Vercel. Este proyecto refleja mis habilidades en desarrollo web moderno y diseño responsivo.",
     link: "https://abrah.dev",
-    repo: "https://abraeh.dev",
+    repo: "https://github.com/abrahdev/abrah.dev",
     image:
       "https://raw.githubusercontent.com/abrahdev/abrah.dev/refs/heads/main/src/assets/projects/portfolio.webp",
     tags: [TAGS.ASTRO, TAGS.TAILWIND],

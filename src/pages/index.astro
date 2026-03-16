@@ -7,6 +7,7 @@ import SectionContainer from "../components/SectionContainer.astro";
 import LayersIcon from "../components/icons/LayersIcon.astro";
 import Projects from "../components/Projects.astro";
 import BookIcon from "../components/icons/BookIcon.astro";
+import Contact from "../components/Contact.astro";
 ---
 
 <Layout
@@ -15,17 +16,17 @@ import BookIcon from "../components/icons/BookIcon.astro";
 >
   <main class="px-4 sm:px-6 lg:px-0">
     <SectionContainer class="w-full lg:w-[840px] mx-auto sm:py-30 py-15">
-      <a href="https://www.github.com/abrahesh" target="_blank">
+      <a href="https://www.github.com/abrahdev" target="_blank">
         <img
           class="rounded-full size-24 hidden sm:block"
           src="https://avatars.githubusercontent.com/u/108555670?v=4"
           alt="abrah photo"
         />
       </a>
-      <h1 class=" text-4xl lg:text-5xl font-bold flex flex-row py-4">
+      <h1 class="text-4xl lg:text-5xl font-bold flex flex-row py-4">
         Hey, soy
         <a
-          href="https://github.com/abrahesh"
+          href="https://github.com/abrahdev"
           target="_blank"
           rel="noopener"
           class="flex justify-center items-center pl-4 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500
@@ -50,19 +51,20 @@ import BookIcon from "../components/icons/BookIcon.astro";
     </SectionContainer>
     <SectionContainer id="experience" class="w-full lg:w-[840px] mx-auto py-15">
       <h2 class="text-3xl font-semibold pb-8 gap-x-2 flex items-center">
-      <BookIcon class="size-7" />
-      Recorrido académico
+        <BookIcon class="size-7" />
+        Recorrido académico
       </h2>
       <Timeline />
-      
     </SectionContainer>
     <SectionContainer id="projects" class="w-full lg:w-[840px] mx-auto py-15">
       <h2 class="text-3xl font-semibold pb-8 gap-x-2 flex items-center">
-        <LayersIcon class="size-7"/>
+        <LayersIcon class="size-7" />
         Proyectos
       </h2>
       <Projects />
-
+    </SectionContainer>
+    <SectionContainer id="contact" class="w-full lg:w-[840px] mx-auto py-15">
+      <Contact />
     </SectionContainer>
   </main>
 </Layout>
