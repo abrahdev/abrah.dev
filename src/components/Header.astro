@@ -1,75 +1,109 @@
 ---
-import ThemeToggle from "./ThemeToggle.astro"
+import ThemeToggle from "./ThemeToggle.astro";
 
 const navItems = [
-  {
-    title: "Inicio",
-    label: "inicio",
-    url: "#",
-  },
-  {
-    title: "Experiencia",
-    label: "experiencia",
-    url: "#experience",
-  },
-  {
-    title: "Proyectos",
-    label: "proyectos",
-    url: "#projects",
-  },
-  {
-    title: "Contacto",
-    label: "contacto",
-    url: "#contact",
-  },
-]
+  { title: "Inicio", label: "inicio", url: "#" },
+  { title: "Experiencia", label: "experiencia", url: "#experience" },
+  { title: "Proyectos", label: "proyectos", url: "#projects" },
+  { title: "Contacto", label: "contacto", url: "#contact" },
+];
 ---
 
 <header
-  class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2"
+  class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2 gap-4"
 >
   <nav
-    class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center"
+    class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center custom-nav"
   >
     {
       navItems.map((link) => (
         <a
-          class="relative block px-2 py-2 transition hover:text-purple-400 dark:hover:text-purple-400"
+          class="relative block px-2 py-2 transition hover:text-purple-500 dark:hover:text-purple-400"
           aria-label={link.label}
           href={link.url}
         >
           {link.title}
         </a>
-        
       ))
     }
   </nav>
 </header>
 
-
 <style>
-  nav {
-    animation: nav-shadow 1s linear both;
-    animation-timeline: scroll();
-    animation-range: 0 100px;
+  .custom-nav {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(229, 231, 235, 0.5);
   }
 
-  nav {
-    background-color: rgba(255, 255, 255, 0.5);
+  @supports (animation-timeline: scroll()) {
+    .custom-nav {
+      animation: nav-shadow-light 1s linear both;
+      animation-timeline: scroll();
+      animation-range: 0 100px;
+    }
   }
 
-  .dark nav {
-    background-color: rgba(31, 41, 55, 0.9);
-  }
-
-  @keyframes nav-shadow {
+  @keyframes nav-shadow-light {
     0% {
-      background-color: rgba(255, 255, 255, 0);
+      background-color: rgba(243, 244, 246, 0.3);
+      backdrop-filter: blur(0px);
       box-shadow: none;
+      border: 1px solid rgba(229, 231, 235, 0);
+
     }
     100% {
-      background-color: rgba(0, 0, 0, 0.8);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(229, 231, 235, 0.5);
+    }
+  }
+
+  @keyframes nav-shadow-dark {
+    0% {
+      background-color: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0px);
+      box-shadow: none;
+      border: 1px solid rgba(255, 255, 255, 0);
+
+    }
+    100% {
+      background-color: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.5),
+        0 2px 4px -2px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  :global(.dark) .custom-nav,
+  :global(html.dark) .custom-nav,
+  :global(body.dark) .custom-nav {
+    background-color: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.5),
+      0 2px 4px -2px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation-name: nav-shadow-dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(html:not(.light)) .custom-nav {
+      background-color: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.5),
+        0 2px 4px -2px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation-name: nav-shadow-dark;
     }
   }
 </style>
