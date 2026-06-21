@@ -7,7 +7,7 @@ const { class: className } = Astro.props;
     class="absolute inset-0 rounded-xl bg-neutral-200 dark:bg-neutral-800"
     data-skeleton
   />
-  <div data-skeleton-target>
+  <div class="h-full" data-skeleton-target>
     <slot />
   </div>
 </div>
