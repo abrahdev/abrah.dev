@@ -1,0 +1,25 @@
+---
+const { class: className } = Astro.props;
+---
+
+<div class:list={["relative", className]}>
+  <div
+    class="absolute inset-0 rounded-xl bg-neutral-200 dark:bg-neutral-800"
+    data-skeleton
+  />
+  <div data-skeleton-target>
+    <slot />
+  </div>
+</div>
+
+<script>
+  for (const target of document.querySelectorAll("[data-skeleton-target]")) {
+    const el = target.firstElementChild;
+    const skeleton = target.parentElement?.querySelector("[data-skeleton]");
+    if (!skeleton || !el) continue;
+    const hide = () => skeleton.style.display = "none";
+    if ("complete" in el && el.complete) hide();
+    else el.addEventListener("load", hide);
+    el.addEventListener("error", hide);
+  }
+</script>

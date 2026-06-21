@@ -10,6 +10,7 @@ import DartLogo from "../components/icons/DartLogo.astro";
 import DockerLogo from "../components/icons/DockerLogo.astro";
 import FlutterLogo from "../components/icons/FlutterLogo.astro";
 import LinkButton from "./LinkButton.astro";
+import Skeleton from "./Skeleton.astro";
 
 const TAGS = {
   TAILWIND: {
@@ -111,12 +112,14 @@ const PROJECTS = [
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
           <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl">
-            <img
-              alt="Imagen de proyecto"
-              class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
-              loading="lazy"
-              src={image.src}
-            />
+            <Skeleton class="w-full h-56 sm:h-full rounded-xl overflow-hidden">
+              <img
+                alt="Imagen de proyecto"
+                class="object-cover object-top w-full h-full transition duration-500 md:scale-110 md:group-hover:scale-105"
+                loading="lazy"
+                src={image.src}
+              />
+            </Skeleton>
           </div>
         </div>
 
