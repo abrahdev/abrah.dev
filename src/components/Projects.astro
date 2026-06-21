@@ -59,6 +59,11 @@ const TAGS = {
     icon: FlutterLogo,
   },
 };
+import karterImg from "../assets/projects/karter.png";
+import joseCarniceriaImg from "../assets/projects/jose-carniceria.png";
+import notionMarketplaceImg from "../assets/projects/notion-marketplace.webp";
+import portfolioImg from "../assets/projects/portfolio.webp";
+
 const PROJECTS = [
   {
     title: "Actualmente - Karter",
@@ -66,8 +71,7 @@ const PROJECTS = [
       "Desarrollo de una herramienta especializada orientada a la eficiencia y automatización de procesos. Este proyecto se centra en la optimización de flujos de trabajo técnicos, facilitando la gestión y el procesamiento de datos a través de una arquitectura sólida y escalable.",
     link: "https://abrahdev.github.io/karter/",
     repo: "https://github.com/abrahdev/karter",
-    image:
-      "https://raw.githubusercontent.com/abrahdev/abrah.dev/refs/heads/main/src/assets/projects/karter.png",
+    image: karterImg,
     tags: [TAGS.DART, TAGS.DOCKER, TAGS.FLUTTER],
   },
   {
@@ -76,8 +80,7 @@ const PROJECTS = [
       "Landing page moderna para un negocio cárnico local, optimizada para la conversión y la visualización de productos. Implementé un diseño intuitivo que destaca la calidad del catálogo y facilita el contacto directo con el cliente.",
     link: "https://jose-carniceria.vercel.app/",
     repo: "",
-    image:
-      "https://raw.githubusercontent.com/abrahdev/abrah.dev/refs/heads/main/src/assets/projects/jose-carniceria.png",
+    image: joseCarniceriaImg,
     tags: [TAGS.ASTRO, TAGS.TAILWIND, TAGS.STRAPI],
   },
   {
@@ -86,8 +89,7 @@ const PROJECTS = [
       "He diseñado y publicado plantillas originales para el Marketplace de Notion. Utilicé técnicas de web scraping para analizar datos para crear mis plantillas, lo que me permitió optimizar mis diseños y posicionarlos mejor.",
     link: "https://notion.abrah.dev",
     repo: "https://notion.abrah.dev",
-    image:
-      "https://raw.githubusercontent.com/abrahdev/abrah.dev/refs/heads/main/src/assets/projects/notion-marketplace.webp",
+    image: notionMarketplaceImg,
 
     tags: [TAGS.NOTION, TAGS.PYTHON],
   },
@@ -97,8 +99,7 @@ const PROJECTS = [
       "Mi portafolio creado en Astro, utilizando TailwindCSS para los estilos y desplegado en Vercel. Este proyecto refleja mis habilidades en desarrollo web moderno y diseño responsivo.",
     link: "https://abrah.dev",
     repo: "https://github.com/abrahdev/abrah.dev",
-    image:
-      "https://raw.githubusercontent.com/abrahdev/abrah.dev/refs/heads/main/src/assets/projects/portfolio.webp",
+    image: portfolioImg,
     tags: [TAGS.ASTRO, TAGS.TAILWIND],
   },
 ];
@@ -114,7 +115,7 @@ const PROJECTS = [
               alt="Imagen de proyecto"
               class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
               loading="lazy"
-              src={image}
+              src={image.src}
             />
           </div>
         </div>
