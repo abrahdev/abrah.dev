@@ -2,44 +2,99 @@
 import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
 import GitHubIcon from "../components/icons/GitHubIcon.astro";
 import MailIcon from "../components/icons/MailIcon.astro";
+
+const EMAIL = "abraham@abrah.dev";
 ---
 
-<ul class="flex flex-row gap-x-5">
-  <a
-    href="https://www.linkedin.com/in/abrahamescalona/"
-    target="_blank"
-    rel="noopener"
-  >
-    <LinkedInIcon class="size-8" />
-  </a>
-  <a href="https://github.com/abrahdev" target="_blank" rel="noopener">
-    <GitHubIcon class="size-8" />
-  </a>
-  <a
-    href="javascript:void(0);"
-    onclick="navigator.clipboard.writeText('abraham@abrah.dev');"
-    class="flex flex-row gap-x-2"
-  >
-    <span
-      class="flex gap-2-x items-center font-extralight dark:text-indigo-100opacity-70 hover:opacity-100 dark:hover:text-violet-300 hover:text-violet-900 transition-colors duration-100"
+<ul class="flex flex-row flex-wrap mt-5 items-center gap-x-5 gap-y-3">
+  <li>
+    <a
+      href="https://www.linkedin.com/in/abrahamescalona/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="social-link"
+      aria-label="LinkedIn"
+    >
+      <LinkedInIcon class="size-8" />
+    </a>
+  </li>
+
+  <li>
+    <a
+      href="https://github.com/abrahdev"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="social-link"
+      aria-label="GitHub"
+    >
+      <GitHubIcon class="size-8" />
+    </a>
+  </li>
+
+  <li>
+    <button
+      type="button"
+      id="copy-email"
+      class="social-link flex items-center gap-2 font-extralight cursor-pointer"
+      aria-label="Copiar email"
+      title="Haz clic para copiar"
     >
       <MailIcon class="size-8" />
-      <div class="pl-4">abraham@abrah.dev</div>
-    </span>
-  </a>
-  <a
-    href="/CV_Abraham_Escalona.pdf"
-    download
-    class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:border-purple-400 dark:hover:border-purple-500 transition-colors duration-200"
-  >
-    <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-      ><path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-      ></path>
+      <span id="email-text" class="inline-block w-[13.5ch]">{EMAIL}</span>
+    </button>
+
+    <script define:vars={{ EMAIL }}>
+      const btn = document.getElementById("copy-email");
+      const text = document.getElementById("email-text");
+
+      btn.addEventListener("click", () => {
+        navigator.clipboard.writeText(EMAIL);
+
+        text.textContent = "Copiado!";
+
+        setTimeout(() => {
+          text.textContent = EMAIL;
+        }, 2000);
+      });
+    </script>
+  </li>
+
+  <li>
+    <a
+      href="/CV_Abraham_Escalona.pdf"
+      download
+      class="social-link-pill"
+      aria-label="Descargar CV"
+    >
+      <svg
+        class="size-4"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+        ></path>
       </svg>
-    CV
-  </a>
+      CV
+    </a>
+  </li>
 </ul>
+
+<style>
+  @reference "tailwindcss";
+
+  .social-link {
+    @apply text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200;
+  }
+
+  .social-link-pill {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full  text-sm
+           border-gray-300 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-500
+           text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200;
+  }
+</style>
