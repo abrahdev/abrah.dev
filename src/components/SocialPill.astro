@@ -4,7 +4,7 @@ import GitHubIcon from "../components/icons/GitHubIcon.astro";
 import MailIcon from "../components/icons/MailIcon.astro";
 ---
 
-<ul class="flex flex-row gap-x-5 pt-6">
+<ul class="flex flex-row gap-x-5">
   <a
     href="https://www.linkedin.com/in/abrahamescalona/"
     target="_blank"
@@ -26,5 +26,20 @@ import MailIcon from "../components/icons/MailIcon.astro";
       <MailIcon class="size-8" />
       <div class="pl-4">abraham@abrah.dev</div>
     </span>
+  </a>
+  <a
+    href="/CV_Abraham_Escalona.pdf"
+    download
+    class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:border-purple-400 dark:hover:border-purple-500 transition-colors duration-200"
+  >
+    <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+      ><path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+      ></path>
+      </svg>
+    CV
   </a>
 </ul>
