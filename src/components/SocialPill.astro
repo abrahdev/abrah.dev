@@ -2,14 +2,17 @@
 import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
 import GitHubIcon from "../components/icons/GitHubIcon.astro";
 import MailIcon from "../components/icons/MailIcon.astro";
+import { getProfile, CV_URL } from "../lib/profile";
 
-const EMAIL = "abraham@abrah.dev";
+const { profile } = await getProfile();
+const EMAIL = profile.email;
+const links = profile.links;
 ---
 
 <ul class="flex flex-row flex-wrap mt-5 items-center gap-x-5 gap-y-3">
   <li>
     <a
-      href="https://www.linkedin.com/in/abrahamescalona/"
+      href={links.linkedin ?? "#"}
       target="_blank"
       rel="noopener noreferrer"
       class="social-link"
@@ -21,7 +24,7 @@ const EMAIL = "abraham@abrah.dev";
 
   <li>
     <a
-      href="https://github.com/abrahdev"
+      href={links.github ?? "#"}
       target="_blank"
       rel="noopener noreferrer"
       class="social-link"
@@ -61,8 +64,9 @@ const EMAIL = "abraham@abrah.dev";
 
   <li>
     <a
-      href="/CV_Abraham_Escalona.pdf"
-      download
+      href={CV_URL}
+      target="_blank"
+      rel="noopener noreferrer"
       class="social-link-pill"
       aria-label="Descargar CV"
     >

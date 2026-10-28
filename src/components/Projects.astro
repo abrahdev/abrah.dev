@@ -1,152 +1,114 @@
 ---
-import TailwindLogo from "../components/icons/TailwindLogo.astro";
-import AstroLogo from "../components/icons/AstroLogo.astro";
-import ReactLogo from "../components/icons/ReactLogo.astro";
 import PreviewIcon from "../components/icons/PreviewIcon.astro";
-import PythonLogo from "../components/icons/PythonLogo.astro";
-import NotionLogo from "../components/icons/NotionLogo.astro";
-import StrapiLogo from "../components/icons/StrapiLogo.astro";
-import DartLogo from "../components/icons/DartLogo.astro";
-import DockerLogo from "../components/icons/DockerLogo.astro";
-import FlutterLogo from "../components/icons/FlutterLogo.astro";
 import LinkButton from "./LinkButton.astro";
 import Skeleton from "./Skeleton.astro";
+import { getProfile } from "../lib/profile";
 
-const TAGS = {
-  TAILWIND: {
-    name: "TailwindCSS",
-    class: "bg-[#39a7ff] text-white",
-    icon: TailwindLogo,
-  },
-  ASTRO: {
-    name: "Astro",
-    class:
-      "bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-white",
-    icon: AstroLogo,
-  },
-  REACT: {
-    name: "React",
-    class: "text-[#61DAFB]",
-    icon: ReactLogo,
-  },
-  PYTHON: {
-    name: "Python",
-    class: "bg-[#4B8BBE] text-[#ffffff]",
-    icon: PythonLogo,
-  },
-  NOTION: {
-    name: "Notion",
-    class: "bg-[#ffffff] text-[#000000]",
-    icon: NotionLogo,
-  },
-  STRAPI: {
-    name: "Strapi",
-    class: "bg-[#4945FF] text-white",
-    icon: StrapiLogo,
-  },
-  DART: {
-    name: "Dart",
-    class: "bg-[#0175C2] text-white",
-    icon: DartLogo,
-  },
-  DOCKER: {
-    name: "Docker",
-    class: "bg-[#2496ED] text-white",
-    icon: DockerLogo,
-  },
-  FLUTTER: {
-    name: "Flutter",
-    class: "bg-[#dddddd] text-blue-500",
-    icon: FlutterLogo,
-  },
+const { projects, skills } = await getProfile();
+
+const SKILLICONS: Record<string, string> = {};
+for (const group of skills) {
+  for (const item of group.items) {
+    if (item.skillicon) SKILLICONS[item.name] = item.skillicon;
+  }
+}
+
+// Iconos que no existen en skillicons.dev.
+const SKILLICON_OVERRIDES: Record<string, string> = {
+  Strapi: "https://go-skill-icons.vercel.app/api/icons?i=strapi",
 };
-import karterImg from "../assets/projects/karter.png";
-import joseCarniceriaImg from "../assets/projects/jose-carniceria.png";
-import notionMarketplaceImg from "../assets/projects/notion-marketplace.webp";
-import portfolioImg from "../assets/projects/portfolio.webp";
 
-const PROJECTS = [
-  {
-    title: "Actualmente - Karter",
-    description:
-      "Desarrollo de una herramienta especializada orientada a la eficiencia y automatización de procesos. Este proyecto se centra en la optimización de flujos de trabajo técnicos, facilitando la gestión y el procesamiento de datos a través de una arquitectura sólida y escalable.",
-    link: "https://abrahdev.github.io/karter/",
-    repo: "https://github.com/abrahdev/karter",
-    image: karterImg,
-    tags: [TAGS.DART, TAGS.DOCKER, TAGS.FLUTTER],
-  },
-  {
-    title: "Web page José Carnicería",
-    description:
-      "Landing page moderna para un negocio cárnico local, optimizada para la conversión y la visualización de productos. Implementé un diseño intuitivo que destaca la calidad del catálogo y facilita el contacto directo con el cliente.",
-    link: "https://jose-carniceria.vercel.app/",
-    repo: "",
-    image: joseCarniceriaImg,
-    tags: [TAGS.ASTRO, TAGS.TAILWIND, TAGS.STRAPI],
-  },
-  {
-    title: "Creador de Notion Marketplace +2K Descargas",
-    description:
-      "He diseñado y publicado plantillas originales para el Marketplace de Notion. Utilicé técnicas de web scraping para analizar datos para crear mis plantillas, lo que me permitió optimizar mis diseños y posicionarlos mejor.",
-    link: "https://notion.abrah.dev",
-    repo: "https://notion.abrah.dev",
-    image: notionMarketplaceImg,
+function skilliconUrl(name: string) {
+  if (SKILLICON_OVERRIDES[name]) return SKILLICON_OVERRIDES[name];
+  const value = SKILLICONS[name];
+  if (value) {
+    return value.startsWith("http")
+      ? value
+      : `https://skillicons.dev/icons?i=${value}`;
+  }
+  const slug = /^[a-z0-9]+$/i.test(name) ? name.toLowerCase() : null;
+  return slug ? `https://skillicons.dev/icons?i=${slug}` : null;
+}
 
-    tags: [TAGS.NOTION, TAGS.PYTHON],
-  },
-  {
-    title: "Mi portafolio abrah.dev",
-    description:
-      "Mi portafolio creado en Astro, utilizando TailwindCSS para los estilos y desplegado en Vercel. Este proyecto refleja mis habilidades en desarrollo web moderno y diseño responsivo.",
-    link: "https://abrah.dev",
-    repo: "https://github.com/abrahdev/abrah.dev",
-    image: portfolioImg,
-    tags: [TAGS.ASTRO, TAGS.TAILWIND],
-  },
-];
+const projectImages = import.meta.glob("../assets/projects/*", {
+  eager: true,
+  import: "default",
+}) as Record<string, { src: string }>;
+
+function resolveImage(file?: string) {
+  if (!file) return undefined;
+  const key = Object.keys(projectImages).find((path) =>
+    path.endsWith(`/${file}`),
+  );
+  return key ? projectImages[key].src : undefined;
+}
+
+const PROJECTS = projects.map((project) => ({
+  ...project,
+  displayTitle: project.card_title ?? project.title,
+  preview: project.demo ?? project.link,
+  href: project.repo ?? project.demo ?? project.link ?? "#",
+  imageSrc: resolveImage(project.image),
+}));
 ---
 
 <div class="flex flex-col gap-y-16">
   {
-    PROJECTS.map(({ image, title, description, tags, link, repo }) => (
+    PROJECTS.map((project) => (
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
-          <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl">
-            <Skeleton class="w-full h-56 rounded-xl overflow-hidden">
-              <img
-                alt="Imagen de proyecto"
-                class="object-cover object-top w-full h-full transition duration-500 md:scale-110 md:group-hover:scale-105"
-                loading="lazy"
-                src={image.src}
-              />
-            </Skeleton>
-          </div>
+          {project.imageSrc && (
+            <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl">
+              <Skeleton class="w-full h-56 rounded-xl overflow-hidden">
+                <img
+                  alt={`Imagen de ${project.displayTitle}`}
+                  class="object-cover object-top w-full h-full transition duration-500 md:scale-110 md:group-hover:scale-105"
+                  loading="lazy"
+                  src={project.imageSrc}
+                />
+              </Skeleton>
+            </div>
+          )}
         </div>
 
         <div class="w-full md:w-1/2 md:max-w-lg">
           <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
-            <a href={repo}>{title}</a>
+            <a href={project.href}>{project.displayTitle}</a>
           </h3>
           <div class="flex flex-wrap mt-2">
-            <ul class="flex flex-row mb-2 gap-x-2">
-              {tags.map((tag) => (
-                <li>
-                  <span
-                    class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 `}
-                  >
-                    <tag.icon class="size-4" />
-                    {tag.name}
-                  </span>
-                </li>
-              ))}
+            <ul class="flex flex-row flex-wrap items-center mb-2 gap-x-2 gap-y-2">
+              {project.tags?.map((name) => {
+                const icon = skilliconUrl(name);
+                return (
+                  <li>
+                    {icon ? (
+                      <img
+                        src={icon}
+                        alt={name}
+                        title={name}
+                        class="size-8"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <span class="text-xs text-gray-700 dark:text-gray-300">
+                        {name}
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
 
             <div class="mt-2 text-gray-700 dark:text-gray-400">
-              {description}
+              {project.summary ? (
+                project.summary
+              ) : (
+                <Fragment set:html={project.bodyHtml} />
+              )}
             </div>
             <footer class="flex items-end justify-start mt-4 gap-x-4">
-              {link && (
-                <LinkButton href={link}>
+              {project.preview && (
+                <LinkButton href={project.preview}>
                   Preview
                   <PreviewIcon class="size-4" />
                 </LinkButton>

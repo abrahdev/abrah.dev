@@ -1,0 +1,47 @@
+name: Previsualización
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'astro.config.mjs'
+      - 'tailwind.config.mjs'
+      - '.github/workflows/preview.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Instalar Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Generar previsualización
+        run: pnpm preview:shot
+
+      - name: Commit de la previsualización
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Actualizar previsualización'
+          file_pattern: public/preview.png

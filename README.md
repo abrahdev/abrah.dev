@@ -1,48 +1,29 @@
-# Astro Starter Kit: Basics
+# abrah.dev
+
+Portfolio personal construido con Astro y TailwindCSS.
+
+[![Previsualización](https://abrah.dev/preview.png)](https://abrah.dev)
+
+## Contenido
+
+El contenido es la fuente única de [`abrahdev/content`](https://github.com/abrahdev/abrahdev/tree/main/content).
+En cada build se descarga [`profile.json`](https://raw.githubusercontent.com/abrahdev/abrahdev/main/profile.json);
+si falla la red o el JSON no es válido, se usa `src/data/profile.fallback.json`.
+
+El CV enlaza al PDF del repo de `abrahdev`, que se regenera con cada cambio de contenido.
+
+## Comandos
 
 ```sh
-npm create astro@latest -- --template basics
+pnpm dev            # servidor de desarrollo
+pnpm build          # build estático en dist/
+pnpm preview        # sirve dist/
+pnpm sync:profile   # actualiza el fallback con el profile.json remoto
+pnpm shot           # captura public/preview.png (requiere dist/)
+pnpm preview:shot   # build + captura
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Previsualización
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+`.github/workflows/preview.yml` ejecuta `pnpm preview:shot` en cada push a `main`
+y commitea `public/preview.png`. La imagen se sirve en `/preview.png`.
