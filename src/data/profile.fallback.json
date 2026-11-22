@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "18743ec",
+  "sourceCommit": "a99632c",
   "profile": {
     "name": "Abraham Escalona Seco de Herrera",
     "displayName": "Abraham Escalona S.",
@@ -223,6 +223,20 @@
   ],
   "timeline": [
     {
+      "type": "award",
+      "slug": "2026-11-hackathon-santa-tecla",
+      "title": "2º en Hackathon de Programación - Santa Tecla 2026",
+      "date": "Noviembre 2026",
+      "start": "2026-11",
+      "end": null,
+      "current": false,
+      "body": "- Participación en pareja en el Hackathon de Programación resolviendo retos algorítmicos con Python.",
+      "bodyHtml": "<ul><li>Participación en pareja en el Hackathon de Programación resolviendo retos algorítmicos con Python.</li></ul>",
+      "summary": "Reconocimiento obtenido en el Hackathon de Programación de Santa Tecla 2026, celebrado en la Escuela Superior de Informática de la UCLM.",
+      "org": "UCLM",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7524872470441476096/"
+    },
+    {
       "type": "job",
       "slug": "2026-09-innovate",
       "title": "Expositor en La Cabina de Telefónica",
@@ -355,6 +369,21 @@
     }
   ],
   "projects": [
+    {
+      "type": "project",
+      "slug": "prootcode",
+      "title": "ProotCode",
+      "date": "Octubre 2026 - Actualidad",
+      "start": "2026-10",
+      "end": null,
+      "current": true,
+      "body": "- Desarrollo de una aplicación Kotlin para Android que despliega entornos Linux rootless mediante proot, sin acceso root.\n- Asistente de instalación de entornos Ubuntu, Code Server por entorno y terminales PTY interactivos con pestañas y sesiones en segundo plano.",
+      "bodyHtml": "<ul><li>Desarrollo de una aplicación Kotlin para Android que despliega entornos Linux rootless mediante proot, sin acceso root.</li><li>Asistente de instalación de entornos Ubuntu, Code Server por entorno y terminales PTY interactivos con pestañas y sesiones en segundo plano.</li></ul>",
+      "summary": "Aplicación open-source en Kotlin para Android que despliega entornos Linux rootless con proot, con terminales PTY y Code Server.",
+      "repo": "https://github.com/abrahdev/ProotCode",
+      "demo": "https://abrahdev.github.io/ProotCode/",
+      "image": "prootcode.png"
+    },
     {
       "type": "project",
       "slug": "karter",
